@@ -108,7 +108,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <li>The kaggle notebook will be created with some code for you, including code to print out the file paths to the train and test data sets</li>
 <li>In addition to <code>numpy</code> and <code>pandas</code>, we will be using some functions from <code>sklearn</code></li>
 </ul>
-<div id="c46735fe" class="cell" data-execution_count="1">
+<div id="fa657a2c" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> numpy <span class="im">as</span> np <span class="co"># linear algebra</span></span>
 <span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a><span class="im">import</span> pandas <span class="im">as</span> pd <span class="co"># data processing, CSV file I/O (e.g. pd.read_csv)</span></span>
 <span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn <span class="im">import</span> feature_extraction, linear_model, model_selection, preprocessing, svm</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -116,14 +116,14 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li>We are going to read in the train and test file using the <code>read_csv</code> function from pandas.</li>
 </ul>
-<div id="eca43978" class="cell" data-execution_count="2">
+<div id="a8ebc946" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href="#cb2-1" aria-hidden="true" tabindex="-1"></a>train_df <span class="op">=</span> pd.read_csv(<span class="st">"kaggle/input/nlp-getting-started/train.csv"</span>)</span>
 <span id="cb2-2"><a href="#cb2-2" aria-hidden="true" tabindex="-1"></a>test_df <span class="op">=</span> pd.read_csv(<span class="st">"kaggle/input/nlp-getting-started/test.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li>We can list the variable (column) names using the <code>.columns</code> property call:</li>
 </ul>
-<div id="c624bec9" class="cell" data-execution_count="3">
+<div id="027a937b" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href="#cb3-1" aria-hidden="true" tabindex="-1"></a>train_df.columns</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="3">
 <pre><code>Index(['id', 'keyword', 'location', 'text', 'target'], dtype='object')</code></pre>
@@ -132,7 +132,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li>We can also look at the first few observations using the <code>.head()</code> method:</li>
 </ul>
-<div id="17035576" class="cell" data-execution_count="4">
+<div id="9d93b084" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a>train_df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="4">
 <div>
@@ -201,7 +201,7 @@ pre > code.sourceCode > span > a:first-child::before { text-decoration: underlin
 <ul>
 <li>We can look at the first observations of a specific column by adding the column name between square brackets to the data frame:</li>
 </ul>
-<div id="ccc4d49f" class="cell" data-execution_count="5">
+<div id="56e80209" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>train_df[<span class="st">"text"</span>].head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="5">
 <pre><code>0    Our Deeds are the Reason of this #earthquake M...
@@ -213,7 +213,7 @@ Name: text, dtype: object</code></pre>
 </div>
 </div>
 <p>The target is a binary variable that is <code>1</code> when the tweet is referring to a disaster, and <code>0</code> otherwise.</p>
-<div id="60e0058a" class="cell" data-execution_count="6">
+<div id="0c877293" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a>train_df.groupby(<span class="st">"target"</span>).size()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 <div class="cell-output cell-output-display" data-execution_count="6">
 <pre><code>target
@@ -228,10 +228,10 @@ dtype: int64</code></pre>
 <ul>
 <li>There are a number of ways to convert text to numeric variables. Let’s start with scikit-learn’s <code>CountVectorizer</code> to count the words in each tweet.</li>
 </ul>
-<div id="adf31faa" class="cell" data-execution_count="7">
+<div id="dc5f14e1" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a>count_vectorizer <span class="op">=</span> feature_extraction.text.CountVectorizer()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="a6a05ca3" class="cell" data-execution_count="8">
+<div id="31809a21" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href="#cb11-1" aria-hidden="true" tabindex="-1"></a>train_vectors <span class="op">=</span> count_vectorizer.fit_transform(train_df[<span class="st">"text"</span>])</span>
 <span id="cb11-2"><a href="#cb11-2" aria-hidden="true" tabindex="-1"></a>test_vectors <span class="op">=</span> count_vectorizer.transform(test_df[<span class="st">"text"</span>])</span>
 <span id="cb11-3"><a href="#cb11-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(train_vectors.toarray())</span>
@@ -262,11 +262,11 @@ dtype: int64</code></pre>
 <ul>
 <li>Check the <a href="https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.CountVectorizer.html">documentation page for CountVectorizer</a></li>
 </ul>
-<div id="6fa77f2e" class="cell" data-execution_count="9">
+<div id="1a6f7a36" class="cell" data-execution_count="9">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a>my_vocabulary <span class="op">=</span> [<span class="st">"disaster"</span>, <span class="st">"fire"</span>, <span class="st">"earthquake"</span>, <span class="st">"shelter in place"</span>]</span>
 <span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>count_vectorizer <span class="op">=</span> feature_extraction.text.CountVectorizer(vocabulary<span class="op">=</span>my_vocabulary)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="d974a58b" class="cell" data-execution_count="10">
+<div id="56252b14" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a>train_vectors <span class="op">=</span> count_vectorizer.fit_transform(train_df[<span class="st">"text"</span>])</span>
 <span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>test_vectors <span class="op">=</span> count_vectorizer.transform(test_df[<span class="st">"text"</span>])</span>
 <span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(train_vectors[<span class="dv">0</span>].toarray())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -274,10 +274,10 @@ dtype: int64</code></pre>
 <pre><code>[[0 0 1 0]]</code></pre>
 </div>
 </div>
-<div id="6ed73b1a" class="cell" data-execution_count="11">
+<div id="2a967699" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a>count_vectorizer <span class="op">=</span> feature_extraction.text.CountVectorizer(stop_words<span class="op">=</span><span class="st">'english'</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="39aa668d" class="cell" data-execution_count="12">
+<div id="ef78471c" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb17"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a>train_vectors <span class="op">=</span> count_vectorizer.fit_transform(train_df[<span class="st">"text"</span>])</span>
 <span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>test_vectors <span class="op">=</span> count_vectorizer.transform(test_df[<span class="st">"text"</span>])</span>
 <span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(train_vectors[<span class="dv">0</span>].toarray())</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -286,7 +286,7 @@ dtype: int64</code></pre>
 </div>
 </div>
 <p>Instead of counts, we can use <a href="https://www.tidytextmining.com/tfidf">tf-idf (term frequency inverted document frequency)</a></p>
-<div id="03af8d4d" class="cell" data-execution_count="13">
+<div id="6058a915" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb19"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a>tfid_vectorizer <span class="op">=</span> feature_extraction.text.TfidfVectorizer(stop_words<span class="op">=</span><span class="st">'english'</span>)</span>
 <span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>train_vectors_tfid <span class="op">=</span> tfid_vectorizer.fit_transform(train_df[<span class="st">"text"</span>])</span>
 <span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>test_vectors_tfid <span class="op">=</span> tfid_vectorizer.transform(test_df[<span class="st">"text"</span>])</span>
@@ -299,47 +299,111 @@ dtype: int64</code></pre>
   (0, 5429) 0.510614541608432</code></pre>
 </div>
 </div>
+<ul>
+<li>Read the <a href="https://scikit-learn.org/stable/modules/classes.html#module-sklearn.feature_extraction.text">sklearn documentation</a> if you want to learn about what ways to extrace features from text</li>
+</ul>
+<div id="750ed038" class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>hash_vectorizer <span class="op">=</span> feature_extraction.text.HashingVectorizer(n_features<span class="op">=</span><span class="dv">2</span><span class="op">**</span><span class="dv">4</span>)</span>
+<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>train_vectors_hash <span class="op">=</span> hash_vectorizer.fit_transform(train_df[<span class="st">"text"</span>])</span>
+<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>test_vectors_hash <span class="op">=</span> hash_vectorizer.transform(test_df[<span class="st">"text"</span>])</span>
+<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a><span class="bu">print</span>(train_vectors_hash[<span class="dv">0</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>  (0, 0)    0.3779644730092272
+  (0, 2)    0.3779644730092272
+  (0, 8)    -0.3779644730092272
+  (0, 11)   -0.3779644730092272
+  (0, 12)   0.3779644730092272
+  (0, 14)   -0.3779644730092272
+  (0, 15)   0.3779644730092272</code></pre>
+</div>
+</div>
 </section>
 <section id="models" class="level2">
 <h2 class="anchored" data-anchor-id="models">Models</h2>
+<p>For all the models, we will evaluate a score (F1) by cross-validation.</p>
+<p><img src="images/grid_search_cross_validation.png" class="img-fluid"></p>
+<p><img src="images/github-recovery-codes.png" class="img-fluid"></p>
 <section id="ridge-classifier" class="level3">
 <h3 class="anchored" data-anchor-id="ridge-classifier">Ridge Classifier</h3>
-<div id="73117d61" class="cell" data-execution_count="14">
-<div class="sourceCode cell-code" id="cb21"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a>clf <span class="op">=</span> linear_model.RidgeClassifier()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<p>Ridge regression</p>
+<p>https://scikit-learn.org/stable/modules/linear_model.html#ridge-regression</p>
+<div id="faf9fc65" class="cell" data-execution_count="15">
+<div class="sourceCode cell-code" id="cb23"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a>clf <span class="op">=</span> linear_model.RidgeClassifier()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="24aefe22" class="cell" data-execution_count="15">
-<div class="sourceCode cell-code" id="cb22"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a>scores <span class="op">=</span> model_selection.cross_val_score(clf, train_vectors, train_df[<span class="st">"target"</span>], cv<span class="op">=</span><span class="dv">5</span>, scoring<span class="op">=</span><span class="st">"f1"</span>)</span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>scores</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="15">
+<p>Run the ridge classifier with the token count features.</p>
+<div id="6b2d6d82" class="cell" data-execution_count="16">
+<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>scores <span class="op">=</span> model_selection.cross_val_score(clf, train_vectors, train_df[<span class="st">"target"</span>], cv<span class="op">=</span><span class="dv">5</span>, scoring<span class="op">=</span><span class="st">"f1"</span>)</span>
+<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>scores</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="16">
 <pre><code>array([0.59099437, 0.4767642 , 0.55128205, 0.4783028 , 0.66462011])</code></pre>
 </div>
 </div>
-<div id="2ae7b19d" class="cell" data-execution_count="16">
-<div class="sourceCode cell-code" id="cb24"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb24-1"><a href="#cb24-1" aria-hidden="true" tabindex="-1"></a>scores <span class="op">=</span> model_selection.cross_val_score(clf, train_vectors_tfid, train_df[<span class="st">"target"</span>], cv<span class="op">=</span><span class="dv">5</span>, scoring<span class="op">=</span><span class="st">"f1"</span>)</span>
-<span id="cb24-2"><a href="#cb24-2" aria-hidden="true" tabindex="-1"></a>scores</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="16">
+<p>Run the ridge classifier with the tf-idf features.</p>
+<div id="9f63c878" class="cell" data-execution_count="17">
+<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>scores <span class="op">=</span> model_selection.cross_val_score(clf, train_vectors_tfid, train_df[<span class="st">"target"</span>], cv<span class="op">=</span><span class="dv">5</span>, scoring<span class="op">=</span><span class="st">"f1"</span>)</span>
+<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>scores</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="17">
 <pre><code>array([0.57773512, 0.51890941, 0.58184902, 0.54700855, 0.71033938])</code></pre>
+</div>
+</div>
+<div id="8fb34691" class="cell" data-execution_count="18">
+<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>scores <span class="op">=</span> model_selection.cross_val_score(clf, train_vectors_hash, train_df[<span class="st">"target"</span>], cv<span class="op">=</span><span class="dv">5</span>, scoring<span class="op">=</span><span class="st">"f1"</span>)</span>
+<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>scores</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="18">
+<pre><code>array([0.36144578, 0.30691057, 0.38267875, 0.35080645, 0.36594912])</code></pre>
 </div>
 </div>
 </section>
 <section id="logistic-regression" class="level3">
 <h3 class="anchored" data-anchor-id="logistic-regression">Logistic Regression</h3>
-<div id="15b9854d" class="cell" data-execution_count="17">
-<div class="sourceCode cell-code" id="cb26"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a>logistic <span class="op">=</span> linear_model.LogisticRegression()</span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>scores <span class="op">=</span> model_selection.cross_val_score(logistic, train_vectors, train_df[<span class="st">"target"</span>], cv<span class="op">=</span><span class="dv">5</span>, scoring<span class="op">=</span><span class="st">"f1"</span>)</span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>scores</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="17">
+<div id="51d6a168" class="cell" data-execution_count="19">
+<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>logistic <span class="op">=</span> linear_model.LogisticRegression()</span>
+<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>scores <span class="op">=</span> model_selection.cross_val_score(logistic, train_vectors, train_df[<span class="st">"target"</span>], cv<span class="op">=</span><span class="dv">5</span>, scoring<span class="op">=</span><span class="st">"f1"</span>)</span>
+<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>scores</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="19">
 <pre><code>array([0.58444023, 0.52181352, 0.59400998, 0.54949121, 0.7203125 ])</code></pre>
+</div>
+</div>
+</section>
+<section id="stochastic-gradient-descent-sgd" class="level3">
+<h3 class="anchored" data-anchor-id="stochastic-gradient-descent-sgd">Stochastic gradient descent (SGD)</h3>
+<div id="a078a4b6" class="cell" data-execution_count="20">
+<div class="sourceCode cell-code" id="cb32"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb32-1"><a href="#cb32-1" aria-hidden="true" tabindex="-1"></a>sgd_model <span class="op">=</span> linear_model.SGDClassifier(max_iter<span class="op">=</span><span class="dv">1000</span>, tol<span class="op">=</span><span class="fl">1e-3</span>)</span>
+<span id="cb32-2"><a href="#cb32-2" aria-hidden="true" tabindex="-1"></a>scores <span class="op">=</span> model_selection.cross_val_score(sgd_model, train_vectors, train_df[<span class="st">"target"</span>], cv<span class="op">=</span><span class="dv">3</span>, scoring<span class="op">=</span><span class="st">"f1"</span>)</span>
+<span id="cb32-3"><a href="#cb32-3" aria-hidden="true" tabindex="-1"></a>scores</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="20">
+<pre><code>array([0.5826087 , 0.53958649, 0.61594581])</code></pre>
+</div>
+</div>
+<p><a href="https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.SGDClassifier.html#sklearn.linear_model.SGDClassifier">Documentation</a></p>
+<div id="7fb92cbf" class="cell" data-execution_count="21">
+<div class="sourceCode cell-code" id="cb34"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb34-1"><a href="#cb34-1" aria-hidden="true" tabindex="-1"></a>sgd_model <span class="op">=</span> linear_model.SGDClassifier(loss<span class="op">=</span><span class="st">"perceptron"</span>, eta0<span class="op">=</span><span class="dv">1</span>, learning_rate<span class="op">=</span><span class="st">"constant"</span>, penalty<span class="op">=</span><span class="va">None</span>)</span>
+<span id="cb34-2"><a href="#cb34-2" aria-hidden="true" tabindex="-1"></a>scores <span class="op">=</span> model_selection.cross_val_score(sgd_model, train_vectors, train_df[<span class="st">"target"</span>], cv<span class="op">=</span><span class="dv">3</span>, scoring<span class="op">=</span><span class="st">"f1"</span>)</span>
+<span id="cb34-3"><a href="#cb34-3" aria-hidden="true" tabindex="-1"></a>scores</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="21">
+<pre><code>array([0.61116367, 0.57027753, 0.65059185])</code></pre>
+</div>
+</div>
+</section>
+<section id="tree-classifier" class="level3">
+<h3 class="anchored" data-anchor-id="tree-classifier">Tree classifier</h3>
+<div id="ea06ffc9" class="cell" data-execution_count="22">
+<div class="sourceCode cell-code" id="cb36"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb36-1"><a href="#cb36-1" aria-hidden="true" tabindex="-1"></a><span class="im">from</span> sklearn.tree <span class="im">import</span> DecisionTreeClassifier</span>
+<span id="cb36-2"><a href="#cb36-2" aria-hidden="true" tabindex="-1"></a>tree_clf <span class="op">=</span> DecisionTreeClassifier(random_state<span class="op">=</span><span class="dv">0</span>)</span>
+<span id="cb36-3"><a href="#cb36-3" aria-hidden="true" tabindex="-1"></a>scores <span class="op">=</span> model_selection.cross_val_score(tree_clf, train_vectors, train_df[<span class="st">"target"</span>], cv<span class="op">=</span><span class="dv">3</span>, scoring<span class="op">=</span><span class="st">"f1"</span>)</span>
+<span id="cb36-4"><a href="#cb36-4" aria-hidden="true" tabindex="-1"></a>scores</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="22">
+<pre><code>array([0.51742469, 0.43776371, 0.52378463])</code></pre>
 </div>
 </div>
 </section>
 <section id="suport-vector-machines" class="level3">
 <h3 class="anchored" data-anchor-id="suport-vector-machines">Suport Vector Machines</h3>
-<div id="a4bc54e1" class="cell" data-execution_count="18">
-<div class="sourceCode cell-code" id="cb28"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a>support_vector <span class="op">=</span> svm.SVC(gamma<span class="op">=</span><span class="st">'auto'</span>)</span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>scores <span class="op">=</span> model_selection.cross_val_score(support_vector, train_vectors, train_df[<span class="st">"target"</span>], cv<span class="op">=</span><span class="dv">2</span>, scoring<span class="op">=</span><span class="st">"f1"</span>)</span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>scores</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="18">
+<div id="03c78c5e" class="cell" data-execution_count="23">
+<div class="sourceCode cell-code" id="cb38"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb38-1"><a href="#cb38-1" aria-hidden="true" tabindex="-1"></a>support_vector <span class="op">=</span> svm.SVC(gamma<span class="op">=</span><span class="st">'auto'</span>)</span>
+<span id="cb38-2"><a href="#cb38-2" aria-hidden="true" tabindex="-1"></a>scores <span class="op">=</span> model_selection.cross_val_score(support_vector, train_vectors, train_df[<span class="st">"target"</span>], cv<span class="op">=</span><span class="dv">2</span>, scoring<span class="op">=</span><span class="st">"f1"</span>)</span>
+<span id="cb38-3"><a href="#cb38-3" aria-hidden="true" tabindex="-1"></a>scores</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="23">
 <pre><code>array([0., 0.])</code></pre>
 </div>
 </div>
@@ -347,11 +411,11 @@ dtype: int64</code></pre>
 </section>
 <section id="creating-a-submission-file" class="level2">
 <h2 class="anchored" data-anchor-id="creating-a-submission-file">Creating a submission file</h2>
-<div id="f70b834c" class="cell" data-execution_count="19">
-<div class="sourceCode cell-code" id="cb30"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb30-1"><a href="#cb30-1" aria-hidden="true" tabindex="-1"></a>logistic.fit(train_vectors, train_df[<span class="st">"target"</span>])</span>
-<span id="cb30-2"><a href="#cb30-2" aria-hidden="true" tabindex="-1"></a>sample_submission <span class="op">=</span> pd.read_csv(<span class="st">"kaggle/input/nlp-getting-started/sample_submission.csv"</span>)</span>
-<span id="cb30-3"><a href="#cb30-3" aria-hidden="true" tabindex="-1"></a>sample_submission[<span class="st">"target"</span>] <span class="op">=</span> logistic.predict(test_vectors)</span>
-<span id="cb30-4"><a href="#cb30-4" aria-hidden="true" tabindex="-1"></a>sample_submission.to_csv(<span class="st">"submission.csv"</span>, index<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div id="c55b0311" class="cell" data-execution_count="24">
+<div class="sourceCode cell-code" id="cb40"><pre class="sourceCode python code-with-copy"><code class="sourceCode python"><span id="cb40-1"><a href="#cb40-1" aria-hidden="true" tabindex="-1"></a>logistic.fit(train_vectors, train_df[<span class="st">"target"</span>])</span>
+<span id="cb40-2"><a href="#cb40-2" aria-hidden="true" tabindex="-1"></a>sample_submission <span class="op">=</span> pd.read_csv(<span class="st">"kaggle/input/nlp-getting-started/sample_submission.csv"</span>)</span>
+<span id="cb40-3"><a href="#cb40-3" aria-hidden="true" tabindex="-1"></a>sample_submission[<span class="st">"target"</span>] <span class="op">=</span> logistic.predict(test_vectors)</span>
+<span id="cb40-4"><a href="#cb40-4" aria-hidden="true" tabindex="-1"></a>sample_submission.to_csv(<span class="st">"submission.csv"</span>, index<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 </section>
 
