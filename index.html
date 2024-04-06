@@ -399,11 +399,11 @@
 </div>
 
 </section>
-<section>
-<section id="natural-language-processing-with-disaster-tweets" class="title-slide slide level1 center">
-<h1>Natural Language Processing with Disaster Tweets</h1>
+<section id="natural-language-processing-with-disaster-tweets" class="slide level2">
+<h2>Natural Language Processing with Disaster Tweets</h2>
 <p>Link to these slides: <a href="https://bit.ly/nlp-wh-2024">bit.ly/nlp-wh-2024</a></p>
-</section>
+
+<img data-src="images/bit.ly_nlp-wh-2024.png" class="r-stretch"></section>
 <section id="set-up" class="slide level2">
 <h2>Set up</h2>
 <ul>
@@ -418,7 +418,7 @@
 <ul>
 <li>In addition to <code>numpy</code> and <code>pandas</code>, we will be using some functions from <code>sklearn</code></li>
 </ul>
-<div id="10c2fd6b" class="cell" data-execution_count="1">
+<div id="10885857" class="cell" data-execution_count="1">
 <div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np <span class="co"># linear algebra</span></span>
 <span id="cb1-2"><a href=""></a><span class="im">import</span> pandas <span class="im">as</span> pd <span class="co"># data processing, CSV file I/O (e.g. pd.read_csv)</span></span>
 <span id="cb1-3"><a href=""></a><span class="im">from</span> sklearn <span class="im">import</span> feature_extraction, linear_model, model_selection, preprocessing, svm</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
@@ -429,16 +429,16 @@
 <ul>
 <li>We are going to read in the train and test file using the <code>read_csv</code> function from pandas.</li>
 </ul>
-<div id="296c2e99" class="cell" data-execution_count="2">
+<div id="694658f9" class="cell" data-execution_count="2">
 <div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href=""></a>train_df <span class="op">=</span> pd.read_csv(<span class="st">"kaggle/input/nlp-getting-started/train.csv"</span>)</span>
 <span id="cb2-2"><a href=""></a>test_df <span class="op">=</span> pd.read_csv(<span class="st">"kaggle/input/nlp-getting-started/test.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <ul>
 <li>We can list the variable (column) names using the <code>.columns</code> property call:</li>
 </ul>
-<div id="40bed401" class="cell" data-execution_count="3">
+<div id="80211b32" class="cell" data-execution_count="3">
 <div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href=""></a>train_df.columns</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="65">
+<div class="cell-output cell-output-display" data-execution_count="3">
 <pre><code>Index(['id', 'keyword', 'location', 'text', 'target'], dtype='object')</code></pre>
 </div>
 </div>
@@ -448,9 +448,9 @@
 <ul>
 <li>We can also look at the first few observations using the <code>.head()</code> method:</li>
 </ul>
-<div id="0dd47750" class="cell" data-execution_count="4">
+<div id="777ade01" class="cell" data-execution_count="4">
 <div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href=""></a>train_df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="66">
+<div class="cell-output cell-output-display" data-execution_count="4">
 <div>
 <div>
 <style scoped="">
@@ -532,9 +532,9 @@
 <ul>
 <li>We can look at the first observations of a specific column by adding the column name between square brackets to the data frame:</li>
 </ul>
-<div id="00452246" class="cell" data-execution_count="5">
+<div id="0c02a5e6" class="cell" data-execution_count="5">
 <div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href=""></a>train_df[<span class="st">"text"</span>].head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="67">
+<div class="cell-output cell-output-display" data-execution_count="5">
 <pre><code>0    Our Deeds are the Reason of this #earthquake M...
 1               Forest fire near La Ronge Sask. Canada
 2    All residents asked to 'shelter in place' are ...
@@ -547,9 +547,9 @@ Name: text, dtype: object</code></pre>
 <section id="inspecting-data-2" class="slide level2">
 <h2>Inspecting data</h2>
 <p>The target is a binary variable that is <code>1</code> when the tweet is referring to a disaster, and <code>0</code> otherwise.</p>
-<div id="17837b2f" class="cell" data-execution_count="6">
+<div id="422adfaf" class="cell" data-execution_count="6">
 <div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href=""></a>train_df.groupby(<span class="st">"target"</span>).size()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="68">
+<div class="cell-output cell-output-display" data-execution_count="6">
 <pre><code>target
 0    4342
 1    3271
@@ -562,10 +562,10 @@ dtype: int64</code></pre>
 <ul>
 <li>There are a number of ways to convert text to numeric variables. Let’s start with scikit-learn’s <code>CountVectorizer</code> to count the words in each tweet.</li>
 </ul>
-<div id="6e18e883" class="cell" data-execution_count="7">
+<div id="ace6f9a2" class="cell" data-execution_count="7">
 <div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href=""></a>count_vectorizer <span class="op">=</span> feature_extraction.text.CountVectorizer()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
-<div id="5818d56b" class="cell" data-execution_count="8">
+<div id="7422061c" class="cell" data-execution_count="8">
 <div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href=""></a>train_vectors <span class="op">=</span> count_vectorizer.fit_transform(train_df[<span class="st">"text"</span>])</span>
 <span id="cb11-2"><a href=""></a>test_vectors <span class="op">=</span> count_vectorizer.transform(test_df[<span class="st">"text"</span>])</span>
 <span id="cb11-3"><a href=""></a><span class="bu">print</span>(train_vectors.toarray())</span>
@@ -613,16 +613,16 @@ dtype: int64</code></pre>
 <section id="ridge-classifier" class="slide level2">
 <h2>Ridge Classifier</h2>
 <p><a href="https://scikit-learn.org/stable/modules/linear_model.html#ridge-regression">Documentation</a></p>
-<div id="ad9e9eee" class="cell" data-execution_count="10">
+<div id="f92c6ea1" class="cell" data-execution_count="10">
 <div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href=""></a>clf <span class="op">=</span> linear_model.RidgeClassifier()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
 </div>
 <p>Run the ridge classifier with the token count features.</p>
-<div id="d29b35a0" class="cell" data-execution_count="11">
+<div id="05ac2ba5" class="cell" data-execution_count="11">
 <div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href=""></a>scores <span class="op">=</span> model_selection.cross_val_score(clf, </span>
 <span id="cb14-2"><a href=""></a>                                         train_vectors, train_df[<span class="st">"target"</span>],</span>
 <span id="cb14-3"><a href=""></a>                                         cv<span class="op">=</span><span class="dv">5</span>, scoring<span class="op">=</span><span class="st">"f1"</span>)</span>
 <span id="cb14-4"><a href=""></a>scores</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="73">
+<div class="cell-output cell-output-display" data-execution_count="11">
 <pre><code>array([0.6025641 , 0.50168919, 0.56985004, 0.50781969, 0.67275495])</code></pre>
 </div>
 </div>
@@ -630,23 +630,23 @@ dtype: int64</code></pre>
 <section id="ridge-classifier-1" class="slide level2">
 <h2>Ridge Classifier</h2>
 <p>Run the ridge classifier with the tf-idf features.</p>
-<div id="2519a36f" class="cell" data-execution_count="12">
+<div id="f288c6a9" class="cell" data-execution_count="12">
 <div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href=""></a>scores <span class="op">=</span> model_selection.cross_val_score(clf, </span>
 <span id="cb16-2"><a href=""></a>                                         train_vectors_tfid, train_df[<span class="st">"target"</span>],</span>
 <span id="cb16-3"><a href=""></a>                                         cv<span class="op">=</span><span class="dv">5</span>, scoring<span class="op">=</span><span class="st">"f1"</span>)</span>
 <span id="cb16-4"><a href=""></a>scores</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="74">
+<div class="cell-output cell-output-display" data-execution_count="12">
 <pre><code>array([0.57773512, 0.51890941, 0.58184902, 0.54700855, 0.71033938])</code></pre>
 </div>
 </div>
 </section>
 <section id="logistic-regression" class="slide level2">
 <h2>Logistic Regression</h2>
-<div id="820a801c" class="cell" data-execution_count="13">
+<div id="830d6e3d" class="cell" data-execution_count="13">
 <div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href=""></a>logistic <span class="op">=</span> linear_model.LogisticRegression()</span>
 <span id="cb18-2"><a href=""></a>scores <span class="op">=</span> model_selection.cross_val_score(logistic, train_vectors, train_df[<span class="st">"target"</span>], cv<span class="op">=</span><span class="dv">5</span>, scoring<span class="op">=</span><span class="st">"f1"</span>)</span>
 <span id="cb18-3"><a href=""></a>scores</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
-<div class="cell-output cell-output-display" data-execution_count="75">
+<div class="cell-output cell-output-display" data-execution_count="13">
 <pre><code>array([0.62626263, 0.55340622, 0.62258065, 0.59245961, 0.72713057])</code></pre>
 </div>
 </div>
@@ -654,7 +654,7 @@ dtype: int64</code></pre>
 </section>
 <section id="creating-a-submission-file" class="slide level2">
 <h2>Creating a submission file</h2>
-<div id="756e3d8a" class="cell" data-execution_count="14">
+<div id="47f0fdc9" class="cell" data-execution_count="14">
 <div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href=""></a>logistic.fit(train_vectors, train_df[<span class="st">"target"</span>])</span>
 <span id="cb20-2"><a href=""></a>sample_submission <span class="op">=</span> pd.read_csv(<span class="st">"kaggle/input/nlp-getting-started/sample_submission.csv"</span>)</span>
 <span id="cb20-3"><a href=""></a>sample_submission[<span class="st">"target"</span>] <span class="op">=</span> logistic.predict(test_vectors)</span>
@@ -665,7 +665,7 @@ dtype: int64</code></pre>
 
 </div>
 </div>
-</section></section>
+</section>
     </div>
   </div>
 

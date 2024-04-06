@@ -3,9 +3,11 @@ title: "NPL datathon -- 2024"
 format: revealjs
 ---
 
-# Natural Language Processing with Disaster Tweets
+## Natural Language Processing with Disaster Tweets
 
 Link to these slides: [bit.ly/nlp-wh-2024](https://bit.ly/nlp-wh-2024)
+
+![](images/bit.ly_nlp-wh-2024.png)
 
 ## Set up
 
