@@ -1,6 +1,7 @@
 ---
 title: "NPL datathon -- 2024"
 format: revealjs
+keep-md: true
 ---
 
 ## Natural Language Processing with Disaster Tweets
