@@ -96,7 +96,7 @@ test_vectors_tfid = tfid_vectorizer.transform(test_df["text"])
 print(train_vectors_tfid[0])
 ```
 
-* Read the [sklearn documentation](https://scikit-learn.org/stable/modules/classes.html#module-sklearn.feature_extraction.text) if you want to learn about what ways to extrace features from text
+* Read the [sklearn documentation](https://scikit-learn.org/stable/modules/classes.html#module-sklearn.feature_extraction.text) if you want to learn about what ways to extract features from text
 
 ```{python}
 hash_vectorizer = feature_extraction.text.HashingVectorizer(n_features=2**4)

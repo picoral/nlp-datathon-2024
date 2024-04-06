@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <html lang="en"><head>
-<script src="index_files/libs/clipboard/clipboard.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha512-bLT0Qm9VnAYZDflyKcBaQ2gg0hSYNQrJ8RilYldYQ1FxQYoCLtUjuuRuZo+fjqhx/qtq/1itJ0C2ejDxltZVFg==" crossorigin="anonymous"></script><script src="index_files/libs/clipboard/clipboard.min.js"></script>
 <script src="index_files/libs/quarto-html/tabby.min.js"></script>
 <script src="index_files/libs/quarto-html/popper.min.js"></script>
 <script src="index_files/libs/quarto-html/tippy.umd.min.js"></script>
@@ -28,6 +28,71 @@
       margin: 0 0.8em 0.2em -1em; /* quarto-specific, see https://github.com/quarto-dev/quarto-cli/issues/4556 */ 
       vertical-align: middle;
     }
+    /* CSS for syntax highlighting */
+    pre > code.sourceCode { white-space: pre; position: relative; }
+    pre > code.sourceCode > span { line-height: 1.25; }
+    pre > code.sourceCode > span:empty { height: 1.2em; }
+    .sourceCode { overflow: visible; }
+    code.sourceCode > span { color: inherit; text-decoration: inherit; }
+    div.sourceCode { margin: 1em 0; }
+    pre.sourceCode { margin: 0; }
+    @media screen {
+    div.sourceCode { overflow: auto; }
+    }
+    @media print {
+    pre > code.sourceCode { white-space: pre-wrap; }
+    pre > code.sourceCode > span { text-indent: -5em; padding-left: 5em; }
+    }
+    pre.numberSource code
+      { counter-reset: source-line 0; }
+    pre.numberSource code > span
+      { position: relative; left: -4em; counter-increment: source-line; }
+    pre.numberSource code > span > a:first-child::before
+      { content: counter(source-line);
+        position: relative; left: -1em; text-align: right; vertical-align: baseline;
+        border: none; display: inline-block;
+        -webkit-touch-callout: none; -webkit-user-select: none;
+        -khtml-user-select: none; -moz-user-select: none;
+        -ms-user-select: none; user-select: none;
+        padding: 0 4px; width: 4em;
+        color: #aaaaaa;
+      }
+    pre.numberSource { margin-left: 3em; border-left: 1px solid #aaaaaa;  padding-left: 4px; }
+    div.sourceCode
+      { color: #003b4f; background-color: #f1f3f5; }
+    @media screen {
+    pre > code.sourceCode > span > a:first-child::before { text-decoration: underline; }
+    }
+    code span { color: #003b4f; } /* Normal */
+    code span.al { color: #ad0000; } /* Alert */
+    code span.an { color: #5e5e5e; } /* Annotation */
+    code span.at { color: #657422; } /* Attribute */
+    code span.bn { color: #ad0000; } /* BaseN */
+    code span.bu { } /* BuiltIn */
+    code span.cf { color: #003b4f; } /* ControlFlow */
+    code span.ch { color: #20794d; } /* Char */
+    code span.cn { color: #8f5902; } /* Constant */
+    code span.co { color: #5e5e5e; } /* Comment */
+    code span.cv { color: #5e5e5e; font-style: italic; } /* CommentVar */
+    code span.do { color: #5e5e5e; font-style: italic; } /* Documentation */
+    code span.dt { color: #ad0000; } /* DataType */
+    code span.dv { color: #ad0000; } /* DecVal */
+    code span.er { color: #ad0000; } /* Error */
+    code span.ex { } /* Extension */
+    code span.fl { color: #ad0000; } /* Float */
+    code span.fu { color: #4758ab; } /* Function */
+    code span.im { color: #00769e; } /* Import */
+    code span.in { color: #5e5e5e; } /* Information */
+    code span.kw { color: #003b4f; } /* Keyword */
+    code span.op { color: #5e5e5e; } /* Operator */
+    code span.ot { color: #003b4f; } /* Other */
+    code span.pp { color: #ad0000; } /* Preprocessor */
+    code span.sc { color: #5e5e5e; } /* SpecialChar */
+    code span.ss { color: #20794d; } /* SpecialString */
+    code span.st { color: #20794d; } /* String */
+    code span.va { color: #111111; } /* Variable */
+    code span.vs { color: #20794d; } /* VerbatimString */
+    code span.wa { color: #5e5e5e; font-style: italic; } /* Warning */
   </style>
   <link rel="stylesheet" href="index_files/libs/revealjs/dist/theme/quarto.css">
   <link href="index_files/libs/revealjs/plugin/quarto-line-highlight/line-highlight.css" rel="stylesheet">
@@ -319,6 +384,9 @@
       margin-right: 0; 
     }
   </style>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/require.js/2.3.6/require.min.js" integrity="sha512-c3Nl8+7g4LMSTdrm621y7kf9v3SDPnhxLNhcjFJbKECVnmZHTdo+IRO05sNLTH/D3vA6u1X32ehoLC7WFVdheg==" crossorigin="anonymous"></script>
+  
+  <script type="application/javascript">define('jquery', [],function() {return window.jQuery;})</script>
 </head>
 <body class="quarto-light">
   <div class="reveal">
@@ -342,7 +410,256 @@
 <li>Log in to <a href="https://www.kaggle.com/">kaggle.com</a> and access the <a href="https://www.kaggle.com/competitions/nlp-getting-started/overview">competition page</a></li>
 <li>Click on the black <code>Join Competiton</code> button on the top right</li>
 <li>We are going to be using a kaggle notebook to submit to this competition – click on <code>Code</code> and then <code>+ New Notebook</code></li>
+<li>The kaggle notebook will be created with some code for you, including code to print out the file paths to the train and test data sets</li>
 </ul>
+</section>
+<section id="set-up-1" class="slide level2">
+<h2>Set up</h2>
+<ul>
+<li>In addition to <code>numpy</code> and <code>pandas</code>, we will be using some functions from <code>sklearn</code></li>
+</ul>
+<div id="10c2fd6b" class="cell" data-execution_count="1">
+<div class="sourceCode cell-code" id="cb1"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb1-1"><a href=""></a><span class="im">import</span> numpy <span class="im">as</span> np <span class="co"># linear algebra</span></span>
+<span id="cb1-2"><a href=""></a><span class="im">import</span> pandas <span class="im">as</span> pd <span class="co"># data processing, CSV file I/O (e.g. pd.read_csv)</span></span>
+<span id="cb1-3"><a href=""></a><span class="im">from</span> sklearn <span class="im">import</span> feature_extraction, linear_model, model_selection, preprocessing, svm</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+</section>
+<section id="reading-in-data" class="slide level2">
+<h2>reading in data</h2>
+<ul>
+<li>We are going to read in the train and test file using the <code>read_csv</code> function from pandas.</li>
+</ul>
+<div id="296c2e99" class="cell" data-execution_count="2">
+<div class="sourceCode cell-code" id="cb2"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb2-1"><a href=""></a>train_df <span class="op">=</span> pd.read_csv(<span class="st">"kaggle/input/nlp-getting-started/train.csv"</span>)</span>
+<span id="cb2-2"><a href=""></a>test_df <span class="op">=</span> pd.read_csv(<span class="st">"kaggle/input/nlp-getting-started/test.csv"</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<ul>
+<li>We can list the variable (column) names using the <code>.columns</code> property call:</li>
+</ul>
+<div id="40bed401" class="cell" data-execution_count="3">
+<div class="sourceCode cell-code" id="cb3"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb3-1"><a href=""></a>train_df.columns</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="65">
+<pre><code>Index(['id', 'keyword', 'location', 'text', 'target'], dtype='object')</code></pre>
+</div>
+</div>
+</section>
+<section id="inspecting-data" class="slide level2">
+<h2>Inspecting data</h2>
+<ul>
+<li>We can also look at the first few observations using the <code>.head()</code> method:</li>
+</ul>
+<div id="0dd47750" class="cell" data-execution_count="4">
+<div class="sourceCode cell-code" id="cb5"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb5-1"><a href=""></a>train_df.head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="66">
+<div>
+<div>
+<style scoped="">
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+
+<table class="dataframe" data-quarto-postprocess="true" data-border="1">
+<thead>
+<tr class="header" style="text-align: right;">
+<th data-quarto-table-cell-role="th"></th>
+<th data-quarto-table-cell-role="th">id</th>
+<th data-quarto-table-cell-role="th">keyword</th>
+<th data-quarto-table-cell-role="th">location</th>
+<th data-quarto-table-cell-role="th">text</th>
+<th data-quarto-table-cell-role="th">target</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">0</td>
+<td>1</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Our Deeds are the Reason of this #earthquake M...</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">1</td>
+<td>4</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Forest fire near La Ronge Sask. Canada</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">2</td>
+<td>5</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>All residents asked to 'shelter in place' are ...</td>
+<td>1</td>
+</tr>
+<tr class="even">
+<td data-quarto-table-cell-role="th">3</td>
+<td>6</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>13,000 people receive #wildfires evacuation or...</td>
+<td>1</td>
+</tr>
+<tr class="odd">
+<td data-quarto-table-cell-role="th">4</td>
+<td>7</td>
+<td>NaN</td>
+<td>NaN</td>
+<td>Just got sent this photo from Ruby #Alaska as ...</td>
+<td>1</td>
+</tr>
+</tbody>
+</table>
+
+</div>
+</div>
+</div>
+</div>
+</section>
+<section id="inspecting-data-1" class="slide level2">
+<h2>Inspecting data</h2>
+<ul>
+<li>We can look at the first observations of a specific column by adding the column name between square brackets to the data frame:</li>
+</ul>
+<div id="00452246" class="cell" data-execution_count="5">
+<div class="sourceCode cell-code" id="cb6"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb6-1"><a href=""></a>train_df[<span class="st">"text"</span>].head()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="67">
+<pre><code>0    Our Deeds are the Reason of this #earthquake M...
+1               Forest fire near La Ronge Sask. Canada
+2    All residents asked to 'shelter in place' are ...
+3    13,000 people receive #wildfires evacuation or...
+4    Just got sent this photo from Ruby #Alaska as ...
+Name: text, dtype: object</code></pre>
+</div>
+</div>
+</section>
+<section id="inspecting-data-2" class="slide level2">
+<h2>Inspecting data</h2>
+<p>The target is a binary variable that is <code>1</code> when the tweet is referring to a disaster, and <code>0</code> otherwise.</p>
+<div id="17837b2f" class="cell" data-execution_count="6">
+<div class="sourceCode cell-code" id="cb8"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb8-1"><a href=""></a>train_df.groupby(<span class="st">"target"</span>).size()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="68">
+<pre><code>target
+0    4342
+1    3271
+dtype: int64</code></pre>
+</div>
+</div>
+</section>
+<section id="feature-extraction" class="slide level2">
+<h2>Feature extraction</h2>
+<ul>
+<li>There are a number of ways to convert text to numeric variables. Let’s start with scikit-learn’s <code>CountVectorizer</code> to count the words in each tweet.</li>
+</ul>
+<div id="6e18e883" class="cell" data-execution_count="7">
+<div class="sourceCode cell-code" id="cb10"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb10-1"><a href=""></a>count_vectorizer <span class="op">=</span> feature_extraction.text.CountVectorizer()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<div id="5818d56b" class="cell" data-execution_count="8">
+<div class="sourceCode cell-code" id="cb11"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb11-1"><a href=""></a>train_vectors <span class="op">=</span> count_vectorizer.fit_transform(train_df[<span class="st">"text"</span>])</span>
+<span id="cb11-2"><a href=""></a>test_vectors <span class="op">=</span> count_vectorizer.transform(test_df[<span class="st">"text"</span>])</span>
+<span id="cb11-3"><a href=""></a><span class="bu">print</span>(train_vectors.toarray())</span>
+<span id="cb11-4"><a href=""></a><span class="bu">print</span>(train_vectors[<span class="dv">0</span>])</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-stdout">
+<pre><code>[[0 0 0 ... 0 0 0]
+ [0 0 0 ... 0 0 0]
+ [0 0 0 ... 0 0 0]
+ ...
+ [0 0 0 ... 0 0 0]
+ [0 0 0 ... 0 0 0]
+ [0 0 0 ... 0 0 0]]
+  (0, 14003)    1
+  (0, 5490) 1
+  (0, 2192) 1
+  (0, 18669)    1
+  (0, 15678)    1
+  (0, 13681)    1
+  (0, 18777)    1
+  (0, 6379) 1
+  (0, 12141)    1
+  (0, 1852) 1
+  (0, 7661) 1
+  (0, 19774)    1
+  (0, 1851) 1</code></pre>
+</div>
+</div>
+</section>
+<section id="feature-extraction-1" class="slide level2">
+<h2>Feature extraction</h2>
+<ul>
+<li><p>Check the <a href="https://scikit-learn.org/stable/modules/generated/sklearn.feature_extraction.text.CountVectorizer.html">documentation page for CountVectorizer</a></p></li>
+<li><p>Read the <a href="https://scikit-learn.org/stable/modules/classes.html#module-sklearn.feature_extraction.text">sklearn documentation</a> if you want to learn about what ways to extract features from text</p></li>
+</ul>
+</section>
+<section id="model-validation" class="slide level2">
+<h2>Model validation</h2>
+<p>For all the models, we will evaluate a score (F1) by cross-validation.</p>
+
+<img data-src="images/grid_search_cross_validation.png" class="r-stretch"></section>
+<section id="model-validation-1" class="slide level2">
+<h2>Model validation</h2>
+
+<img data-src="images/github-recovery-codes.png" class="r-stretch"></section>
+<section id="ridge-classifier" class="slide level2">
+<h2>Ridge Classifier</h2>
+<p><a href="https://scikit-learn.org/stable/modules/linear_model.html#ridge-regression">Documentation</a></p>
+<div id="ad9e9eee" class="cell" data-execution_count="10">
+<div class="sourceCode cell-code" id="cb13"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb13-1"><a href=""></a>clf <span class="op">=</span> linear_model.RidgeClassifier()</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
+<p>Run the ridge classifier with the token count features.</p>
+<div id="d29b35a0" class="cell" data-execution_count="11">
+<div class="sourceCode cell-code" id="cb14"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb14-1"><a href=""></a>scores <span class="op">=</span> model_selection.cross_val_score(clf, </span>
+<span id="cb14-2"><a href=""></a>                                         train_vectors, train_df[<span class="st">"target"</span>],</span>
+<span id="cb14-3"><a href=""></a>                                         cv<span class="op">=</span><span class="dv">5</span>, scoring<span class="op">=</span><span class="st">"f1"</span>)</span>
+<span id="cb14-4"><a href=""></a>scores</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="73">
+<pre><code>array([0.6025641 , 0.50168919, 0.56985004, 0.50781969, 0.67275495])</code></pre>
+</div>
+</div>
+</section>
+<section id="ridge-classifier-1" class="slide level2">
+<h2>Ridge Classifier</h2>
+<p>Run the ridge classifier with the tf-idf features.</p>
+<div id="2519a36f" class="cell" data-execution_count="12">
+<div class="sourceCode cell-code" id="cb16"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb16-1"><a href=""></a>scores <span class="op">=</span> model_selection.cross_val_score(clf, </span>
+<span id="cb16-2"><a href=""></a>                                         train_vectors_tfid, train_df[<span class="st">"target"</span>],</span>
+<span id="cb16-3"><a href=""></a>                                         cv<span class="op">=</span><span class="dv">5</span>, scoring<span class="op">=</span><span class="st">"f1"</span>)</span>
+<span id="cb16-4"><a href=""></a>scores</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="74">
+<pre><code>array([0.57773512, 0.51890941, 0.58184902, 0.54700855, 0.71033938])</code></pre>
+</div>
+</div>
+</section>
+<section id="logistic-regression" class="slide level2">
+<h2>Logistic Regression</h2>
+<div id="820a801c" class="cell" data-execution_count="13">
+<div class="sourceCode cell-code" id="cb18"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb18-1"><a href=""></a>logistic <span class="op">=</span> linear_model.LogisticRegression()</span>
+<span id="cb18-2"><a href=""></a>scores <span class="op">=</span> model_selection.cross_val_score(logistic, train_vectors, train_df[<span class="st">"target"</span>], cv<span class="op">=</span><span class="dv">5</span>, scoring<span class="op">=</span><span class="st">"f1"</span>)</span>
+<span id="cb18-3"><a href=""></a>scores</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+<div class="cell-output cell-output-display" data-execution_count="75">
+<pre><code>array([0.62626263, 0.55340622, 0.62258065, 0.59245961, 0.72713057])</code></pre>
+</div>
+</div>
+<p><a href="https://scikit-learn.org/stable/modules/generated/sklearn.linear_model.SGDClassifier.html#sklearn.linear_model.SGDClassifier">Documentation</a></p>
+</section>
+<section id="creating-a-submission-file" class="slide level2">
+<h2>Creating a submission file</h2>
+<div id="756e3d8a" class="cell" data-execution_count="14">
+<div class="sourceCode cell-code" id="cb20"><pre class="sourceCode numberSource python number-lines code-with-copy"><code class="sourceCode python"><span id="cb20-1"><a href=""></a>logistic.fit(train_vectors, train_df[<span class="st">"target"</span>])</span>
+<span id="cb20-2"><a href=""></a>sample_submission <span class="op">=</span> pd.read_csv(<span class="st">"kaggle/input/nlp-getting-started/sample_submission.csv"</span>)</span>
+<span id="cb20-3"><a href=""></a>sample_submission[<span class="st">"target"</span>] <span class="op">=</span> logistic.predict(test_vectors)</span>
+<span id="cb20-4"><a href=""></a>sample_submission.to_csv(<span class="st">"submission.csv"</span>, index<span class="op">=</span><span class="va">False</span>)</span></code><button title="Copy to Clipboard" class="code-copy-button"><i class="bi"></i></button></pre></div>
+</div>
 <div class="quarto-auto-generated-content">
 <div class="footer footer-default">
 
